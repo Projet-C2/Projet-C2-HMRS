@@ -22,6 +22,7 @@
         <activity android:name=".ResortsPage" />
         <activity android:name=".RestaurantsPage" />
         <activity android:name=".ServicesPage" />
+        <activity android:name=".tesst"></activity>
     </application>
 
 </manifest>
