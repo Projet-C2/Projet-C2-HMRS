@@ -21,7 +21,7 @@
         <activity android:name=".NightlifePage" />
         <activity android:name=".ResortsPage" />
         <activity android:name=".RestaurantsPage" />
-        <activity android:name=".ServicesPage"></activity>
+        <activity android:name=".ServicesPage" />
     </application>
 
 </manifest>
