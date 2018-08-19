@@ -10,18 +10,67 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
-        android:layout_weight="2"
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="2">
 
         <TextView
             android:id="@+id/textGrid"
-            android:text="Nearby Deals"
-            android:textSize="34sp"
-            android:textColor="@android:color/white"
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:text="Nearby Deals"
+            android:textColor="@android:color/white"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="22dp"
+            android:layout_marginEnd="60dp"
+            android:text="Vendor?"
+            android:textAllCaps="true"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/Signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/Signup"
+            android:layout_alignTop="@+id/textView"
+            android:onClick="Signin"
+            android:text="SignIn"
+            android:textColor="#FF0000"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/Signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="-57dp"
+            android:layout_toEndOf="@+id/textView"
+            android:onClick="Signup"
+            android:text="SignUp"
+            android:textColor="#FF0000"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/textView"
+            android:layout_marginStart="16dp"
+            android:text="Location:"
+            android:textStyle="bold" />
+
     </RelativeLayout>
 
     <GridLayout

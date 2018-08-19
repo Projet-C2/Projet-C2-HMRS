@@ -27,6 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void Signin(View view){
+        startActivity(new Intent(MainActivity.this, LoginPage.class));
+    }
+
+    public void Signup(View view){
+        startActivity(new Intent(MainActivity.this, SignupPage.class));
+    }
+
+
     private void setSingleEvent(GridLayout mainGrid) {
         //Loop All Child item of Main Grid
         for(int i=0;i<mainGrid.getChildCount();i++)
