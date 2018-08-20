@@ -1,8 +1,11 @@
 package com.example.mariobousamra.projet_c2_hmrs;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,6 +48,14 @@ public class SignupPage extends AppCompatActivity {
                 }
             }
         });
+
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupPage.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private Boolean validate(){
@@ -64,4 +75,16 @@ public class SignupPage extends AppCompatActivity {
         }
         return result;
     }
+
+
+    //Hide keyboard when you click anywhere on the screen
+    //Note: I added this line 'android:onClick="myMethod"' in the respective .xml file.
+    public void myMethod(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+
 }
