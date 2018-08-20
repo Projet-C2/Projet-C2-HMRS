@@ -1,7 +1,11 @@
 package com.example.mariobousamra.projet_c2_hmrs;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,5 +35,28 @@ public class LoginPage extends AppCompatActivity {
         SignUp = (TextView)findViewById(R.id.tvSignUp);
 
         BackToMain = (Button)findViewById(R.id.btnBackToMain);
+
+        SignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validate();//Name.getText().toString(), Password.getText().toString());
+            }
+        });
+    }
+
+
+    private void validate(){//String username, String Password){
+        //if( (username == "admin") && (Password == "1234") ){
+        Intent intent = new Intent(LoginPage.this, SignupPage.class);
+        startActivity(intent);
+        //}
+    }
+
+
+    public void myMethod(View view) {
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
