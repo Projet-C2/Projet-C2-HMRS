@@ -18,7 +18,6 @@ public class LoginPage extends AppCompatActivity {
     private TextView ForgotPassword;
     private TextView SignUp;
     private Button Login;
-    private Button BackToMain;
     private LinearLayout llayout;
 
     @Override
@@ -34,7 +33,7 @@ public class LoginPage extends AppCompatActivity {
         Login = (Button)findViewById(R.id.btnLogin);
         SignUp = (TextView)findViewById(R.id.tvSignUp);
 
-        BackToMain = (Button)findViewById(R.id.btnBackToMain);
+
 
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,13 +42,6 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
-        BackToMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginPage.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
     }
 
