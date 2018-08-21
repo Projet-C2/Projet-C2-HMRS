@@ -2,6 +2,7 @@ package com.example.mariobousamra.projet_c2_hmrs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,12 @@ public class SignupPage extends AppCompatActivity {
         Password = (EditText)findViewById(R.id.etPassword);
         Location = (TextView)findViewById(R.id.tvLocation);
 
+        Location Coor = Globals.Coordinates;
+        if (Coor != null){
+            Location.setText("Latitude:"+Coor.getLatitude()+" \n Longitude: "+Coor.getLongitude());
+        }
+
+
         Create = (Button)findViewById(R.id.btnCreate);
         Cancel = (Button)findViewById(R.id.btnCancel);
 
@@ -67,6 +74,7 @@ public class SignupPage extends AppCompatActivity {
         String email = EmailAddress.getText().toString();
         String password = Password.getText().toString();
         String location = Location.getText().toString();
+
 
         if(name.isEmpty() || lastname.isEmpty() || phone.isEmpty() || email.isEmpty() || password.isEmpty() || location.isEmpty()){
             Toast.makeText(this, "please enter all the details", Toast.LENGTH_SHORT).show();

@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         //set event
         setSingleEvent(mainGrid);
 
+
+
         button = (Button) findViewById(R.id.buttonlocation);
         textView = (TextView) findViewById(R.id.textViewlocation);
         ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 GPStracker g = new GPStracker(getApplicationContext());
                 Location l =g.getLocation();
+                Globals.Coordinates = l;
                 if(l != null){
                     double lat = l.getLatitude();
                     double lon = l.getLongitude();

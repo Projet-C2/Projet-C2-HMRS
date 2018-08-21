@@ -42,6 +42,15 @@ public class LoginPage extends AppCompatActivity {
                 validate();//Name.getText().toString(), Password.getText().toString());
             }
         });
+
+        BackToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginPage.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
