@@ -29,4 +29,12 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
+
+    //This is added for firebase use
+    compile 'com.google.firebase:firebase-core:16.0.0'
+    //Added from https://firebase.google.com/docs/android/setup?authuser=0, for Authentication
+    compile 'com.google.firebase:firebase-auth:16.0.3'
 }
+
+//This is added for firebase use
+apply plugin: 'com.google.gms.google-services'
