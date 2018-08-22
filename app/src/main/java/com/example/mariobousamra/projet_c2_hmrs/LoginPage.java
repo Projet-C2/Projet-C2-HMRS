@@ -36,9 +36,6 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_page);
 
-
-
-
         Email = (EditText)findViewById(R.id.etEmail);
         Password = (EditText)findViewById(R.id.etPass);
         ForgotPassword = (TextView)findViewById(R.id.tvForgotPass);

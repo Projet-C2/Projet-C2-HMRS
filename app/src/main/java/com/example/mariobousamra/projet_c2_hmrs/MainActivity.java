@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     TextView textView;
+    Button Logout;
+
+    private FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -39,10 +44,13 @@ public class MainActivity extends AppCompatActivity {
         //set event
         setSingleEvent(mainGrid);
 
-
+        firebaseAuth = FirebaseAuth.getInstance();
 
         button = (Button) findViewById(R.id.buttonlocation);
         textView = (TextView) findViewById(R.id.textViewlocation);
+        Logout = (Button)findViewById(R.id.btnLogout);
+
+
         ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +68,15 @@ public class MainActivity extends AppCompatActivity {
                     textView.setText(cityName);
 
                 }
+
+            }
+        });
+
+        Logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                firebaseAuth.signOut();
 
             }
         });
