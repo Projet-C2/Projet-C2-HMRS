@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPage extends AppCompatActivity {
 
-    private EditText Name;
+    private EditText Email;
     private EditText Password;
     private TextView ForgotPassword;
     private TextView SignUp;
@@ -39,7 +39,7 @@ public class LoginPage extends AppCompatActivity {
 
 
 
-        Name = (EditText)findViewById(R.id.etEmail);
+        Email = (EditText)findViewById(R.id.etEmail);
         Password = (EditText)findViewById(R.id.etPass);
         ForgotPassword = (TextView)findViewById(R.id.tvForgotPass);
 
@@ -60,7 +60,7 @@ public class LoginPage extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login(Name.getText().toString(), Password.getText().toString());
+                login(Email.getText().toString(), Password.getText().toString());
             }
         });
 
