@@ -47,13 +47,14 @@ public class LoginPage extends AppCompatActivity {
         progressDialog  =new ProgressDialog(this);
 
         //Checking if a user is already logged in
-        /*FirebaseUser user = firebaseAuth.getCurrentUser();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user!=null){
             //finish this activity
-            finish();
+            //finish();
+            Toast.makeText(LoginPage.this,"User already logged in", Toast.LENGTH_SHORT).show();
             //and direct him to the activity
-            startActivity(new Intent(LoginPage.this, MainActivity.class));
-        }*/
+            //startActivity(new Intent(LoginPage.this, MainActivity.class));
+        }
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
