@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.nfc.Tag;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.List;
@@ -76,7 +78,25 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                firebaseAuth.signOut();
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user==null){
+                    //finish this activity
+                    //finish();
+                    Toast.makeText(MainActivity.this,"User is not logged in", Toast.LENGTH_SHORT).show();
+                    //and direct him to the activity
+                    //startActivity(new Intent(LoginPage.this, MainActivity.class));
+                }else{
+                    try {
+                        firebaseAuth.signOut();
+                        Toast.makeText(MainActivity.this, "User Sign out!", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e) {
+                        e.getMessage();
+                    }
+                }
+
+
+
+
 
             }
         });
