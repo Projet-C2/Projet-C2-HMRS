@@ -10,4 +10,5 @@ public class HotelsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotels_page);
     }
+
 }

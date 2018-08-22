@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mainGrid = (GridLayout) findViewById(R.id.mainGrid);
         //set event
         setSingleEvent(mainGrid);
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user==null){
                     //finish this activity
@@ -93,11 +95,6 @@ public class MainActivity extends AppCompatActivity {
                         e.getMessage();
                     }
                 }
-
-
-
-
-
             }
         });
 
@@ -180,6 +177,45 @@ public class MainActivity extends AppCompatActivity {
             );
         }
     }
+
+
+
+    //Ctl+o
+    //Show menu on the toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    //ctl + o
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.logoutMenu:{
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user==null){
+                    //finish this activity
+                    //finish();
+                    Toast.makeText(MainActivity.this,"User is not logged in", Toast.LENGTH_SHORT).show();
+                    //and direct him to the activity
+                    //startActivity(new Intent(LoginPage.this, MainActivity.class));
+                }else{
+                    try {
+                        firebaseAuth.signOut();
+                        Toast.makeText(MainActivity.this, "User Sign out!", Toast.LENGTH_SHORT).show();
+                    }catch (Exception e) {
+                        e.getMessage();
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+
+
+
+
 
 
 }
