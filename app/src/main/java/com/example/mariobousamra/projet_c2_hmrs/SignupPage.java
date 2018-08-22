@@ -3,6 +3,7 @@ package com.example.mariobousamra.projet_c2_hmrs;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SignupPage extends AppCompatActivity {
 
@@ -24,10 +31,14 @@ public class SignupPage extends AppCompatActivity {
     private Button Create;
     private Button Cancel;
 
+    private FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_page);
+
+
 
         //referencing
         Name = (EditText)findViewById(R.id.etName);
@@ -46,13 +57,36 @@ public class SignupPage extends AppCompatActivity {
         Create = (Button)findViewById(R.id.btnCreate);
         Cancel = (Button)findViewById(R.id.btnCancel);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
         Create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(validate()){
+                //if(validate()){
                     //upload data to database
-                }
+                    String user_email =  EmailAddress.getText().toString().trim();
+                    String user_password = Password.getText().toString().trim();
+
+                    //OnCopmlete is used to do something when the process of adding data is completed
+                    /*firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
+                    });*/
+                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(SignupPage.this,new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(SignupPage.this,"Registration Successful", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SignupPage.this, MainActivity.class));
+                            }else{
+                                Toast.makeText(SignupPage.this,"Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                //}
             }
         });
 
