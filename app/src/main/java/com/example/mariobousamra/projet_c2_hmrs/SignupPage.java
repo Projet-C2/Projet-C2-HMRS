@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignupPage extends AppCompatActivity {
 
@@ -79,8 +80,9 @@ public class SignupPage extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(SignupPage.this,"Registration Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignupPage.this, MainActivity.class));
+                                sendEmailVerification();
+                                //Toast.makeText(SignupPage.this,"Registration Successful", Toast.LENGTH_SHORT).show();
+                                //startActivity(new Intent(SignupPage.this, MainActivity.class));
                             }else{
                                 Toast.makeText(SignupPage.this,"Registration Failed", Toast.LENGTH_SHORT).show();
                             }
@@ -119,6 +121,27 @@ public class SignupPage extends AppCompatActivity {
     }
 
 
+    private void sendEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser!=null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(SignupPage.this, "Successfully registered, Verification email sent", Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
+                        finish();
+                        startActivity(new Intent(SignupPage.this, MainActivity.class));
+                    }else{
+                        Toast.makeText(SignupPage.this,"Verification email hasn't been sent", Toast.LENGTH_SHORT);
+                    }
+                }
+            });
+        }
+    }
+
+
+
     //Hide keyboard when you click anywhere on the screen
     //Note: I added this line 'android:onClick="myMethod"' in the respective .xml file.
     public void myMethod(View view) {
@@ -127,6 +150,8 @@ public class SignupPage extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+
 
 
 }

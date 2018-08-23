@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -90,8 +91,8 @@ public class LoginPage extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     progressDialog.dismiss();
-                    Toast.makeText(LoginPage.this,"Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginPage.this, MainActivity.class));
+                    //Toast.makeText(LoginPage.this,"Login Successful", Toast.LENGTH_SHORT).show();
+                    checkEmailVerification();
                 }else{
                     progressDialog.dismiss();
                     Toast.makeText(LoginPage.this,"Login Failed", Toast.LENGTH_SHORT).show();
@@ -107,4 +108,21 @@ public class LoginPage extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    private void checkEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        Boolean emailFlag = firebaseUser.isEmailVerified();
+
+        if(emailFlag){
+            finish();
+            startActivity(new Intent(LoginPage.this, MainActivity.class));
+        }else{
+            Toast.makeText(this, "kindly verify your email", Toast.LENGTH_SHORT).show();
+            firebaseAuth.signOut();
+        }
+    }
+
+
+
+
 }
