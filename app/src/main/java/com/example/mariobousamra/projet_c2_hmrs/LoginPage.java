@@ -70,7 +70,12 @@ public class LoginPage extends AppCompatActivity {
             }
         });
 
-
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginPage.this, ForgotPassword.class));
+            }
+        });
 
     }
 
