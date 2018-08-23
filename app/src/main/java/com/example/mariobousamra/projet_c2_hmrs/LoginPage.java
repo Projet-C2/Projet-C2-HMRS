@@ -114,6 +114,7 @@ public class LoginPage extends AppCompatActivity {
         Boolean emailFlag = firebaseUser.isEmailVerified();
 
         if(emailFlag){
+            Toast.makeText(LoginPage.this,"Login Successful", Toast.LENGTH_SHORT).show();
             finish();
             startActivity(new Intent(LoginPage.this, MainActivity.class));
         }else{
