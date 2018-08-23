@@ -128,10 +128,10 @@ public class SignupPage extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(SignupPage.this, "Successfully Registered, Verification email sent", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         finish();
                         startActivity(new Intent(SignupPage.this, MainActivity.class));
+                        Toast.makeText(SignupPage.this, "Successfully Registered, Verification email sent", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(SignupPage.this,"Verification email hasn't been sent", Toast.LENGTH_SHORT);
                     }
