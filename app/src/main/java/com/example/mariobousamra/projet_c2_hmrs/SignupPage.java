@@ -23,14 +23,10 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignupPage extends AppCompatActivity {
 
 
-    private EditText Name;
-    private EditText LastName;
-    private EditText PhoneNumber;
-    private EditText EmailAddress;
-    private EditText Password;
+    private EditText Name, LastName, PhoneNumber, EmailAddress, Password;
     private TextView Location;
-    private Button Create;
-    private Button Cancel;
+    private Button Create, Cancel;
+
 
     private FirebaseAuth firebaseAuth;
 

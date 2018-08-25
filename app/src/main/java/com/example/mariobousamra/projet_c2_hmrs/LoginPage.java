@@ -23,10 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginPage extends AppCompatActivity {
 
-    private EditText Email;
-    private EditText Password;
-    private TextView ForgotPassword;
-    private TextView SignUp;
+    private EditText Email, Password;
+    private TextView ForgotPassword, SignUp;
     private Button Login;
     private LinearLayout llayout;
     private FirebaseAuth firebaseAuth;
@@ -98,6 +96,7 @@ public class LoginPage extends AppCompatActivity {
                 if(task.isSuccessful()){
                     progressDialog.dismiss();
                     //Toast.makeText(LoginPage.this,"Login Successful", Toast.LENGTH_SHORT).show();
+                    //If the email and password are correct, check also if the email is verified.
                     checkEmailVerification();
                 }else{
                     progressDialog.dismiss();
