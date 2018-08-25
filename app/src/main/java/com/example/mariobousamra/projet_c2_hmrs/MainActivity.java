@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-    //ctl + o
+    //ctl + o // ALT + 0 (with NUMLOCK off)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
