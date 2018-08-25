@@ -107,6 +107,8 @@ public class LoginPage extends AppCompatActivity {
     }
 
 
+    //Hide keyboard when you click anywhere on the screen
+    //Note: I added this line 'android:onClick="myMethod"' in the respective .xml file.
     public void myMethod(View view) {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
