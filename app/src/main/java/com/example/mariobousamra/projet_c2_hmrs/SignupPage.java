@@ -28,6 +28,7 @@ public class SignupPage extends AppCompatActivity {
     private EditText Name, LastName, PhoneNumber, EmailAddress, Password;
     private TextView Location;
     private Button Create, Cancel;
+    String name, lastname, phone;
 
 
     private FirebaseAuth firebaseAuth;
@@ -102,9 +103,9 @@ public class SignupPage extends AppCompatActivity {
     private Boolean validate(){
         boolean result = false;
 
-        String name = Name.getText().toString();
-        String lastname = LastName.getText().toString();
-        String phone = PhoneNumber.getText().toString();
+        name = Name.getText().toString();
+        lastname = LastName.getText().toString();
+        phone = PhoneNumber.getText().toString();
         String email = EmailAddress.getText().toString();
         String password = Password.getText().toString();
         String location = Location.getText().toString();
@@ -126,8 +127,14 @@ public class SignupPage extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
+                        //Add user info to database
+                        //we placed this function inside the email verification, so we don't get any data from spam emails.
+                        sendUserData();
+                        //We cant let the user signin before verification.
                         firebaseAuth.signOut();
+                        //Close signup activity
                         finish();
+                        //start main activity
                         startActivity(new Intent(SignupPage.this, MainActivity.class));
                         Toast.makeText(SignupPage.this, "Successfully Registered, Verification email sent", Toast.LENGTH_LONG).show();
                     }else{
@@ -143,8 +150,10 @@ public class SignupPage extends AppCompatActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         //Users may have similar Names, so instead we use a unique UUid for each user
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+        UserProfile userProfile = new UserProfile(lastname, name,  phone);
         //provide the values
-        myRef.setValue();
+        myRef.setValue(userProfile);
     }
 
 
