@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,19 +23,23 @@ import android.Manifest;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import com.firebase.client.Firebase;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import com.google.firebase.auth.AuthResult;
+//import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+//import com.google.firebase.auth.FirebaseUser;
 
-//import com.google.firebase.storage.FirebaseStorage;
-//import com.google.firebase.storage.StorageReference;
-//import com.google.firebase.storage.UploadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 
 public class AddProduct extends AppCompatActivity implements View.OnClickListener{
@@ -57,7 +62,11 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     String product_category;
     String product_status;
 
+    String realPath;
+    Uri imagepath;
+
     private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +151,25 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
          //send data to firebase database.
          myref.setValue(product);
 
-        }
+         //save image.
+         FirebaseStorage firebasestorage = FirebaseStorage.getInstance();
+         StorageReference storagereference =   firebasestorage.getReference();
+
+         StorageReference myref1 = storagereference.child("uid1" + product_name);
+         UploadTask uploadtask = myref1.putFile(imagepath);
+
+            uploadtask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(AddProduct.this, "Upload failed!", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    Toast.makeText(AddProduct.this, "Upload successful!", Toast.LENGTH_SHORT).show();
+                }
+            });
+          }
         }
 
     private void askForPermission(String permission, Integer requestCode) {
@@ -188,7 +215,9 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int reqCode, int resCode, Intent data) {
         if(resCode == Activity.RESULT_OK && data != null){
-            String realPath;
+
+            imagepath = data.getData();
+
             // SDK < API11
             if (Build.VERSION.SDK_INT < 11)
                 realPath = RealPathUtil.getRealPathFromURI_BelowAPI11(this, data.getData());
