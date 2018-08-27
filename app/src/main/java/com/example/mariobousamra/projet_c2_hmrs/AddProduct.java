@@ -21,9 +21,6 @@ import android.widget.Toast;
 import android.Manifest;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
-import java.text.Format;
-import java.text.NumberFormat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,8 +48,8 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     EditText txt_name;
     EditText txt_price;
     EditText txt_description;
-    Spinner txt_category;
-    Spinner txt_status;
+    Spinner spinner;
+    Spinner spinner2;
 
     String product_name;
     Float product_price;
@@ -76,8 +73,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         txt_name = findViewById(R.id.txt_name);
         txt_price = findViewById(R.id.txt_price);
         txt_description = findViewById(R.id.txt_description);
-        txt_category = findViewById(R.id.spinner_categories);
-        txt_status = findViewById(R.id.spinner_status);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -87,7 +82,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         //allocate array to spinner(drop down list) - [categories - product status]
 
-        Spinner spinner;
         spinner = findViewById(R.id.spinner_categories);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -97,7 +91,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        Spinner spinner2;
         spinner2 = findViewById(R.id.spinner_status);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
@@ -132,32 +125,25 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         if (view.equals(button_save)) {
 
            product_name = txt_name.getText().toString();
-
-           //DecimalFormat df = new DecimalFormat("0.00");
-           //df.setMaximumFractionDigits(2);
-           //product_price = Float.parseFloat(df.format(txt_price.getText().toString()));
-
+           product_price = Float.parseFloat(txt_price.getText().toString());
            product_description = txt_description.getText().toString();
-           product_category = txt_category.toString();
-           product_category = txt_status.toString();
+           product_category = spinner.getSelectedItem().toString();
+           product_status = spinner2.getSelectedItem().toString();
 
-           //send data to firebase database.
+          //get uid from auth.
+          FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
+         //DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid());
 
-            //get uid from auth.
-            FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
-            DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid());
+         DatabaseReference myref = firebasedatabse.getReference("uid1" + product_name);
 
-            //new object of the class Product to the object to firebase database.
-            Product product = new Product (product_name,product_category,product_status,product_description);
+         //new object of the class Product to the object to firebase database.
+         Product product = new Product (product_name,product_category,product_price,product_status,product_description);
 
-            //send data to firebase database.
-            myref.setValue(product);
+         //send data to firebase database.
+         myref.setValue(product);
 
         }
         }
-
-
-
 
     private void askForPermission(String permission, Integer requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
