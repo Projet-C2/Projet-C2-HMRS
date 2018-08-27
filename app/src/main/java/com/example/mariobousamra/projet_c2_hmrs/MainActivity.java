@@ -111,13 +111,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-
-
     }
 
     private String getCityName(LatLng myCoordinates) {

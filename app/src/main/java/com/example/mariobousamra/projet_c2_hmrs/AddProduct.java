@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,17 +17,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.NumberFormat;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-//import com.google.firebase.database.DataSnapshot;
-//import com.google.firebase.database.DatabaseError;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 //import com.google.firebase.storage.FirebaseStorage;
 //import com.google.firebase.storage.StorageReference;
@@ -38,30 +43,47 @@ import java.io.FileNotFoundException;
 public class AddProduct extends AppCompatActivity implements View.OnClickListener{
 
     ImageView imageView;
+
     Button button_image;
     Button button_save;
     Button button_cancel;
-    TextInputEditText txt_name;
+
+    EditText txt_name;
     EditText txt_price;
     EditText txt_description;
+    Spinner txt_category;
+    Spinner txt_status;
+
+    String product_name;
+    Float product_price;
+    String product_description;
+    String product_category;
+    String product_status;
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product);
+       setContentView(R.layout.activity_add_product);
 
         //find by id.
         button_image = findViewById(R.id.button_image);
         button_save = findViewById(R.id.button_Save);
         button_cancel = findViewById(R.id.button_cancel);
+
         txt_name = findViewById(R.id.txt_name);
         txt_price = findViewById(R.id.txt_price);
         txt_description = findViewById(R.id.txt_description);
+        txt_category = findViewById(R.id.spinner_categories);
+        txt_status = findViewById(R.id.spinner_status);
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
-        // add click listener to button
+        // add click listener to buttons
         button_image.setOnClickListener(this);
+        button_save.setOnClickListener(this);
 
         //allocate array to spinner(drop down list) - [categories - product status]
 
@@ -69,7 +91,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         spinner = findViewById(R.id.spinner_categories);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.categories, android.R.layout.simple_spinner_dropdown_item);
+        R.array.categories, android.R.layout.simple_spinner_dropdown_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -90,18 +112,52 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
-        // ask for permission to read image.
-        askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE,4);
+        //button_image
+        if (view.equals(button_image)) {
 
-        // 1. on Upload click call ACTION_GET_CONTENT intent
+            // ask for permission to read image.
+            askForPermission(Manifest.permission.READ_EXTERNAL_STORAGE, 4);
 
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        // 2. pick image only
-        intent.setType("image/*");
-        // 3. start activity
-        startActivityForResult(intent,0);
-        // define onActivityResult to do something with picked image
-    }
+            // 1. on Upload click call ACTION_GET_CONTENT intent
+
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            // 2. pick image only
+            intent.setType("image/*");
+            // 3. start activity
+            startActivityForResult(intent, 0);
+            // define onActivityResult to do something with picked image
+        }
+
+        //button save
+        if (view.equals(button_save)) {
+
+           product_name = txt_name.getText().toString();
+
+           //DecimalFormat df = new DecimalFormat("0.00");
+           //df.setMaximumFractionDigits(2);
+           //product_price = Float.parseFloat(df.format(txt_price.getText().toString()));
+
+           product_description = txt_description.getText().toString();
+           product_category = txt_category.toString();
+           product_category = txt_status.toString();
+
+           //send data to firebase database.
+
+            //get uid from auth.
+            FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
+            DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid());
+
+            //new object of the class Product to the object to firebase database.
+            Product product = new Product (product_name,product_category,product_status,product_description);
+
+            //send data to firebase database.
+            myref.setValue(product);
+
+        }
+        }
+
+
+
 
     private void askForPermission(String permission, Integer requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
@@ -183,12 +239,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         //Log.d("HMKCODE", "Build.VERSION.SDK_INT:"+sdk);
         //Log.d("HMKCODE", "URI Path:"+uriPath);
         //Log.d("HMKCODE", "Real Path: "+realPath);
-    }
-
-    private void SenduserData(){
-
-
-
     }
 
 }
