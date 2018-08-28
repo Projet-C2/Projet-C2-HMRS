@@ -65,6 +65,10 @@ public class SignupPage extends AppCompatActivity {
 
                 //if(validate()){
                     //upload data to database
+                    name = Name.getText().toString();
+                    lastname = LastName.getText().toString();
+                    phone = PhoneNumber.getText().toString();
+
                     String user_email =  EmailAddress.getText().toString().trim();
                     String user_password = Password.getText().toString().trim();
 
