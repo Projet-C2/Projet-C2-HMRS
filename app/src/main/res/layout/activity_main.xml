@@ -335,17 +335,6 @@
 
     </GridLayout>
 
-    <Button
-    android:id="@+id/btnLogout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/logout" />
-
-    <Button
-        android:id="@+id/btn_add_product"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Product" />
 
 
 </LinearLayout>
