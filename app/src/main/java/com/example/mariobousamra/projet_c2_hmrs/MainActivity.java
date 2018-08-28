@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     TextView textView;
     Button Logout;
+    Button btnAddProduct;
 
     private FirebaseAuth firebaseAuth;
 
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         button = (Button) findViewById(R.id.buttonlocation);
         textView = (TextView) findViewById(R.id.textViewlocation);
         Logout = (Button)findViewById(R.id.btnLogout);
+
+        btnAddProduct = (Button) findViewById(R.id.btn_add_product);
 
 
         ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
@@ -95,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
                         e.getMessage();
                     }
                 }
+            }
+        });
+
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(MainActivity.this,AddProduct.class);
+                startActivity(intent);
+
             }
         });
 
