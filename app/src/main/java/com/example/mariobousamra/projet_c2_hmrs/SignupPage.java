@@ -63,11 +63,11 @@ public class SignupPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //if(validate()){
+                if(validate()){
                     //upload data to database
-                    name = Name.getText().toString();
-                    lastname = LastName.getText().toString();
-                    phone = PhoneNumber.getText().toString();
+                    //name = Name.getText().toString();
+                    //lastname = LastName.getText().toString();
+                    //phone = PhoneNumber.getText().toString();
 
                     String user_email =  EmailAddress.getText().toString().trim();
                     String user_password = Password.getText().toString().trim();
@@ -91,7 +91,7 @@ public class SignupPage extends AppCompatActivity {
                             }
                         }
                     });
-                //}
+                }
             }
         });
 
@@ -140,7 +140,7 @@ public class SignupPage extends AppCompatActivity {
                         finish();
                         //start main activity
                         startActivity(new Intent(SignupPage.this, MainActivity.class));
-                        Toast.makeText(SignupPage.this, "Successfully Registered, Verification email sent", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignupPage.this, "Registration Succeeded, Verification email sent", Toast.LENGTH_LONG).show();
                     }else{
                         Toast.makeText(SignupPage.this,"Verification email hasn't been sent", Toast.LENGTH_SHORT);
                     }
