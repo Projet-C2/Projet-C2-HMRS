@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -20,12 +23,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.Manifest;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +53,9 @@ import com.google.firebase.storage.UploadTask;
 
 
 public class AddProduct extends AppCompatActivity implements View.OnClickListener{
+
+    Button button;
+    TextView textView;
 
     ImageView imageView;
 
@@ -75,6 +86,32 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_add_product);
+
+       //location button
+        button = (Button) findViewById(R.id.buttonlocation);
+        textView = (TextView) findViewById(R.id.textViewlocation);
+
+        ActivityCompat.requestPermissions(AddProduct.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GPStracker g = new GPStracker(getApplicationContext());
+                Location l =g.getLocation();
+                Globals.Coordinates = l;
+                if(l != null){
+                    double lat = l.getLatitude();
+                    double lon = l.getLongitude();
+                    LatLng myCoordinates = new LatLng(lat,lon);
+                    Toast.makeText(getApplicationContext(),"Latitude:"+lat+" \n Longitude: "+lon, Toast.LENGTH_LONG).show();
+                    String cityName = getCityName(myCoordinates);
+                    textView.setText(cityName);
+
+                }
+
+            }
+        });
+
 
         //find by id.
         button_image = findViewById(R.id.button_image);
@@ -111,6 +148,20 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         // Apply the adapter to the spinner
         spinner2.setAdapter(adapter2);
 
+    }
+
+    private String getCityName(LatLng myCoordinates) {
+        String myCity ="";
+        Geocoder geocoder =new Geocoder(AddProduct.this, Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(myCoordinates.latitude, myCoordinates.longitude, 1);
+            String address = addresses.get(0).getAddressLine(0);
+            myCity = addresses.get(0).getLocality();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return myCity;
     }
 
     @Override
