@@ -16,4 +16,5 @@
     <string name="get_current_location">Get Current location</string>
     <string name="signin">SignIn</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_gmaps">Map</string>
 </resources>
