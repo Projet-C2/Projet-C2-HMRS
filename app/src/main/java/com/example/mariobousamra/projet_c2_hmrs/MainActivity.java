@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                                                 //Here to start the activities
                                                 if(finalI==0)//Open activity one-->hotels page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,HotelsPage.class);
+                                                    Intent intent =new Intent(MainActivity.this,GMapsActivity.class);
                                                     startActivity(intent);
                                                 }
                                                 else
