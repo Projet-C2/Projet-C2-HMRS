@@ -134,45 +134,52 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         //button save
         if (view.equals(button_save)) {
-
+            
            product_name = txt_name.getText().toString();
            product_price = Float.parseFloat(txt_price.getText().toString());
            product_description = txt_description.getText().toString();
            product_category = spinner.getSelectedItem().toString();
            product_status = spinner2.getSelectedItem().toString();
 
-          //get uid from auth.
-          FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
-         //DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid());
+           //if(!(product_name.isEmpty() || product_price.isNaN() || product_description.isEmpty() || product_category.isEmpty() || product_status.isEmpty() || (imageView.getDrawable() == null) ) ){
 
-         DatabaseReference myref = firebasedatabse.getReference("uid1" + product_name);
+               //get uid from auth.
+               FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
+               //DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid());
 
-         //new object of the class Product to the object to firebase database.
-         Product product = new Product (product_name,product_category,product_price,product_status,product_description);
+               DatabaseReference myref = firebasedatabse.getReference("uid1" + product_name);
 
-         //send data to firebase database.
-         myref.setValue(product);
+               //new object of the class Product to the object to firebase database.
+               Product product = new Product (product_name,product_category,product_price,product_status,product_description);
 
-         //save image.
-         FirebaseStorage firebasestorage = FirebaseStorage.getInstance();
-         StorageReference storagereference =   firebasestorage.getReference();
+               //send data to firebase database.
+               myref.setValue(product);
 
-         StorageReference myref1 = storagereference.child("uid1" + product_name);
-         UploadTask uploadtask = myref1.putFile(imagepath);
+               //save image.
+               FirebaseStorage firebasestorage = FirebaseStorage.getInstance();
+               StorageReference storagereference =   firebasestorage.getReference();
 
-            uploadtask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AddProduct.this, "Upload failed!", Toast.LENGTH_SHORT).show();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    Toast.makeText(AddProduct.this, "Upload successful!", Toast.LENGTH_SHORT).show();
-                }
-            });
-          }
+               StorageReference myref1 = storagereference.child("uid1" + product_name);
+               UploadTask uploadtask = myref1.putFile(imagepath);
+
+               uploadtask.addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       Toast.makeText(AddProduct.this, "Upload failed!", Toast.LENGTH_SHORT).show();
+                   }
+               }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                   @Override
+                   public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                       Toast.makeText(AddProduct.this, "Upload successful!", Toast.LENGTH_SHORT).show();
+                   }
+               });
+
+           //}else{
+             //  Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+           //}
+
         }
+    }
 
     private void askForPermission(String permission, Integer requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
@@ -257,6 +264,8 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         //Log.d("HMKCODE", "URI Path:"+uriPath);
         //Log.d("HMKCODE", "Real Path: "+realPath);
     }
+
+
 
     //Hide keyboard when you click anywhere on the screen
     //Note: I added this line 'android:onClick="myMethod"' in the respective .xml file.
