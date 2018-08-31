@@ -123,7 +123,7 @@ public class LoginPage extends AppCompatActivity {
         if(emailFlag){
             Toast.makeText(LoginPage.this,"Login Successful", Toast.LENGTH_SHORT).show();
             finish();
-            startActivity(new Intent(LoginPage.this, MainActivity.class));
+            startActivity(new Intent(LoginPage.this, VendorPage.class));
         }else{
             Toast.makeText(this, "kindly verify your email", Toast.LENGTH_SHORT).show();
             firebaseAuth.signOut();

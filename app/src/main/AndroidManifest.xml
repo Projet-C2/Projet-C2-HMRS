@@ -32,7 +32,8 @@
         <activity android:name=".LoginPage" />
         <activity android:name=".SignupPage" />
         <activity android:name=".ForgotPassword" />
-        <activity android:name=".AddProduct"></activity>
+        <activity android:name=".AddProduct" />
+        <activity android:name=".VendorPage"></activity>
     </application>
 
 </manifest>
