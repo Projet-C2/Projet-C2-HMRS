@@ -42,7 +42,7 @@ public class VendorPage extends AppCompatActivity {
                 }else{
                     try {
                         firebaseAuth.signOut();
-                        Toast.makeText(VendorPage.this, "User Sign out!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(VendorPage.this, "Signed Out!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(VendorPage.this, MainActivity.class));
                     }catch (Exception e) {
                         e.getMessage();

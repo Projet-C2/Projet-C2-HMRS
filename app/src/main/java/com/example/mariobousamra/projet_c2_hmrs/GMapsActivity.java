@@ -1,5 +1,6 @@
 package com.example.mariobousamra.projet_c2_hmrs;
 
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -41,6 +42,15 @@ public class GMapsActivity extends FragmentActivity implements OnMapReadyCallbac
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        Location Coor = Globals.Coordinates;
+        if (Coor != null) {
+            LatLng myLocation = new LatLng(Coor.getLatitude(), Coor.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(myLocation).title("My Location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        }
+
     }
 }

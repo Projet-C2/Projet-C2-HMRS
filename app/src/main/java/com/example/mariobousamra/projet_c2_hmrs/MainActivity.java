@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setSingleEvent(GridLayout mainGrid) {
+        //Get current location
+        final Location Coor = Globals.Coordinates;
+
         //Loop All Child item of Main Grid
         for(int i=0;i<mainGrid.getChildCount();i++)
         {
@@ -109,8 +112,12 @@ public class MainActivity extends AppCompatActivity {
                                                 //Here to start the activities
                                                 if(finalI==0)//Open activity one-->hotels page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,GMapsActivity.class);
-                                                    startActivity(intent);
+                                                    if (Coor != null) {
+                                                        Intent intent = new Intent(MainActivity.this, GMapsActivity.class);
+                                                        startActivity(intent);
+                                                    }else{
+                                                        Toast.makeText(getApplicationContext(), "Please enable GPS" , Toast.LENGTH_LONG).show();
+                                                    }
                                                 }
                                                 else
                                                 if(finalI==1)//Open activity two-->Resorts page
