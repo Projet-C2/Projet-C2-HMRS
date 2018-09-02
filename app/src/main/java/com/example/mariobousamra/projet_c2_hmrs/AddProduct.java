@@ -60,6 +60,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     ImageView imageView;
 
     Button button_image;
+    Button button_new;
     Button button_save;
     Button button_cancel;
 
@@ -75,7 +76,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     String product_category;
     String product_status;
 
-    String realPath;
+    String realPath="";
     Uri imagepath;
 
     private FirebaseAuth firebaseAuth;
@@ -112,9 +113,9 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             }
         });
 
-
         //find by id.
         button_image = findViewById(R.id.button_image);
+        button_new = findViewById(R.id.button_new);
         button_save = findViewById(R.id.button_Save);
         button_cancel = findViewById(R.id.button_cancel);
 
@@ -126,6 +127,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         // add click listener to buttons
         button_image.setOnClickListener(this);
+        button_new.setOnClickListener(this);
         button_save.setOnClickListener(this);
 
         //allocate array to spinner(drop down list) - [categories - product status]
@@ -185,20 +187,28 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         //button save
         if (view.equals(button_save)) {
-            
-           product_name = txt_name.getText().toString();
-           product_price = Float.parseFloat(txt_price.getText().toString());
-           product_description = txt_description.getText().toString();
-           product_category = spinner.getSelectedItem().toString();
-           product_status = spinner2.getSelectedItem().toString();
 
-           //if(!(product_name.isEmpty() || product_price.isNaN() || product_description.isEmpty() || product_category.isEmpty() || product_status.isEmpty() || (imageView.getDrawable() == null) ) ){
+            product_name = txt_name.getText().toString();
+
+            if (txt_price.getText().toString().isEmpty() ){
+                product_price = Float.parseFloat("0.00");
+
+            }else{
+                product_price = Float.parseFloat(txt_price.getText().toString());
+
+            }
+
+            product_description = txt_description.getText().toString();
+            product_category = spinner.getSelectedItem().toString();
+            product_status = spinner2.getSelectedItem().toString();
+
+            if(!(product_name.isEmpty() || product_price.isNaN() || product_description.isEmpty() || product_category.isEmpty() || product_status.isEmpty() || (realPath == "") ) ){
 
                //get uid from auth.
                FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
                //DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid());
 
-               DatabaseReference myref = firebasedatabse.getReference("uid1" + product_name);
+               DatabaseReference myref = firebasedatabse.getReference("uid1").child(product_name) ;
 
                //new object of the class Product to the object to firebase database.
                Product product = new Product (product_name,product_category,product_price,product_status,product_description);
@@ -210,14 +220,14 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                FirebaseStorage firebasestorage = FirebaseStorage.getInstance();
                StorageReference storagereference =   firebasestorage.getReference();
 
-               StorageReference myref1 = storagereference.child("uid1" + product_name);
+               StorageReference myref1 = storagereference.child("uid1").child(product_name);
                UploadTask uploadtask = myref1.putFile(imagepath);
 
                uploadtask.addOnFailureListener(new OnFailureListener() {
                    @Override
                    public void onFailure(@NonNull Exception e) {
-                       Toast.makeText(AddProduct.this, "Upload failed!", Toast.LENGTH_SHORT).show();
-                   }
+                       Toast.makeText(AddProduct.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                }).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                    @Override
                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -225,12 +235,28 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                    }
                });
 
-           //}else{
-             //  Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
-           //}
+           }else{
+               Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+           }
 
         }
-    }
+
+        if (view.equals(button_new)) {
+
+            txt_name.setText("");
+            txt_price.setText("");
+            txt_description.setText("");
+
+            if (realPath !="") {
+                imageView.setImageResource(0);
+            }
+
+            spinner.setSelection(0);
+            spinner2.setSelection(0);
+
+        }
+        }
+
 
     private void askForPermission(String permission, Integer requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
@@ -293,7 +319,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             setTextViews(Build.VERSION.SDK_INT, data.getData().getPath(),realPath);
         }
     }
-
 
     private void setTextViews(int sdk, String uriPath,String realPath){
         //image

@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, SignupPage.class));
     }
 
+    public void AddProduct(View view){
+        startActivity(new Intent(MainActivity.this, AddProduct.class));
+    }
+
 
     private void setSingleEvent(GridLayout mainGrid) {
         //Get current location

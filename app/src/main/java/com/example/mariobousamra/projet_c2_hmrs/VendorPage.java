@@ -87,7 +87,8 @@ public class VendorPage extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         //Show the Name of logged in user, WELCOME USER.
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("User1").child("Name");
+        //mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child("User1").child("Name");
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Name");
         mNameView = (TextView) findViewById(R.id.name_view);
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
