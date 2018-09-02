@@ -208,7 +208,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
                //DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid());
 
-               DatabaseReference myref = firebasedatabse.getReference("uid1").child(product_name) ;
+               DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid()).child(product_name) ;
 
                //new object of the class Product to the object to firebase database.
                Product product = new Product (product_name,product_category,product_price,product_status,product_description);
@@ -220,7 +220,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                FirebaseStorage firebasestorage = FirebaseStorage.getInstance();
                StorageReference storagereference =   firebasestorage.getReference();
 
-               StorageReference myref1 = storagereference.child("uid1").child(product_name);
+               StorageReference myref1 = storagereference.child(firebaseAuth.getUid()).child(product_name);
                UploadTask uploadtask = myref1.putFile(imagepath);
 
                uploadtask.addOnFailureListener(new OnFailureListener() {

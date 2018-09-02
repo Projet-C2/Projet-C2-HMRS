@@ -61,18 +61,6 @@
         android:textStyle="bold|italic" />
 
         <TextView
-            android:id="@+id/AddProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/textView4"
-            android:layout_marginTop="29dp"
-            android:onClick="AddProduct"
-            android:text="AddProduct"
-            android:textColor="#FF0000"
-            android:textStyle="bold|italic" />
-
-        <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
