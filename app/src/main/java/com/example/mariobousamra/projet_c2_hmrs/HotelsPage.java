@@ -31,25 +31,27 @@ public class HotelsPage extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("zSlSpnH1aXaHkNcT0XhNTBKoePJ2");//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
+        DatabaseReference databaseReference = firebaseDatabase.getReference();//.child("zSlSpnH1aXaHkNcT0XhNTBKoePJ2");//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
+               for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
 //                    try {
 //                        // Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getRef().addValueEventListener().toString(), Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getValue().toString(), Toast.LENGTH_SHORT).show();
 //                    }catch (Exception ex){
 //
 //                    }
-//                }
-                try{
-                    //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                    Toast.makeText(HotelsPage.this,""+dataSnapshot.child("Name"), Toast.LENGTH_LONG).show();
-                }catch (Exception ex){
-                    Toast.makeText(HotelsPage.this,""+ex, Toast.LENGTH_LONG).show();
-                }
+
+                   try{
+                       //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                       Toast.makeText(HotelsPage.this,""+item_snapshot.child("Name").getValue().toString(), Toast.LENGTH_SHORT).show();
+                   }catch (Exception ex){
+                       Toast.makeText(HotelsPage.this,""+ex, Toast.LENGTH_LONG).show();
+                   }
+               }
+
 
 
 
