@@ -2,22 +2,30 @@ package com.example.mariobousamra.projet_c2_hmrs;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
+import static com.example.mariobousamra.projet_c2_hmrs.R.id.user_list;
 
 public class VendorPage extends AppCompatActivity {
 
@@ -29,11 +37,52 @@ public class VendorPage extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private TextView mNameView;
 
+    private DatabaseReference mDatabase1;
+    private ListView mUserList;
+    private ArrayList<String> mList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_page);
+
+        //list view data
+        //mDatabase1 = FirebaseDatabase.getInstance().getReference();
+        //mUserList =(ListView)findViewById(R.id.user_list);
+        //final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, mList);
+        //mUserList.setAdapter(arrayAdapter);
+       // mDatabase1.addChildEventListener(new ChildEventListener() {
+        //    @Override
+       //     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        //        String value = dataSnapshot.getValue(String.class);
+        //        mList.add(value);
+        //        arrayAdapter.notifyDataSetChanged();
+
+        //    }
+
+        //    @Override
+         //   public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        //    }
+
+        //    @Override
+         //   public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+        //    }
+
+        //    @Override
+        //    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+        //    }
+
+         //  @Override
+         //  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+         //   }
+       // });
+
 
         firebaseAuth = FirebaseAuth.getInstance();
 
