@@ -10,7 +10,7 @@
     tools:context=".HotelsPage">
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -18,8 +18,8 @@
         android:layout_marginTop="40dp"
         android:text="NearBy Hotels"
         android:textAllCaps="true"
-        android:textSize="25sp"
         android:textColor="@android:color/white"
+        android:textSize="25sp"
         android:textStyle="bold|italic" />
 
     <ListView

@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     String cityName = getCityName(myCoordinates);
                     textView.setText(cityName);
 
+
                 }
 
             }
@@ -112,12 +113,8 @@ public class MainActivity extends AppCompatActivity {
                                                 //Here to start the activities
                                                 if(finalI==0)//Open activity one-->hotels page
                                                 {
-                                                    if (Coor != null) {
-                                                        Intent intent = new Intent(MainActivity.this, GMapsActivity.class);
+                                                        Intent intent = new Intent(MainActivity.this, HotelsPage.class);
                                                         startActivity(intent);
-                                                    }else{
-                                                        Toast.makeText(getApplicationContext(), "Please enable GPS" , Toast.LENGTH_LONG).show();
-                                                    }
                                                 }
                                                 else
                                                 if(finalI==1)//Open activity two-->Resorts page
