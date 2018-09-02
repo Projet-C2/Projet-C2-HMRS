@@ -67,9 +67,10 @@ public class HotelsPage extends AppCompatActivity {
                        try {
                            //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                            //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
-                           ListElementsArrayList.add(info_item_snapshot.child("product_name").getValue().toString());
-                           adapter.notifyDataSetChanged();
-
+                           if(info_item_snapshot.child("product_category").getValue().toString().equals("service")){
+                               ListElementsArrayList.add(info_item_snapshot.child("product_name").getValue().toString());
+                               adapter.notifyDataSetChanged();
+                           }
                        } catch (Exception ex) {
                            //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();
                        }
