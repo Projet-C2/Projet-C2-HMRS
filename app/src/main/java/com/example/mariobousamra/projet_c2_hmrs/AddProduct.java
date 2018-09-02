@@ -129,6 +129,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         button_image.setOnClickListener(this);
         button_new.setOnClickListener(this);
         button_save.setOnClickListener(this);
+        button_cancel.setOnClickListener(this);
 
         //allocate array to spinner(drop down list) - [categories - product status]
 
@@ -255,6 +256,12 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             spinner2.setSelection(0);
 
         }
+
+        if (view.equals(button_cancel)) {
+            Intent intent = new Intent(AddProduct.this, VendorPage.class);
+            startActivity(intent);
+        }
+
         }
 
 
