@@ -35,7 +35,7 @@ public class RestaurantsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurants_page);
 
-        Title = (TextView)findViewById(R.id.tvTitle);
+        Title = (TextView)findViewById(R.id.textView8);
 
 
         listView = (ListView)findViewById(R.id.databaseListview6);

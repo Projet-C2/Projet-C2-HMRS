@@ -9,6 +9,19 @@
     android:weightSum="10"
     tools:context=".NightlifePage">
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="NearBy NightLife"
+        android:textAllCaps="true"
+        android:textSize="25sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold|italic" />
+
     <ListView
         android:id="@+id/databaseListview4"
         android:layout_width="match_parent"
@@ -44,17 +57,6 @@
         android:layout_marginBottom="19dp"
         android:text="More" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="NearBy NightLife"
-        android:textAllCaps="true"
-        android:textSize="25sp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold|italic" />
+
 
 </RelativeLayout>

@@ -35,7 +35,7 @@ public class HotelsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotels_page);
 
-        Title = (TextView)findViewById(R.id.tvTitle);
+        Title = (TextView)findViewById(R.id.HotelList);
 
 
         listView = (ListView)findViewById(R.id.databaseListview);

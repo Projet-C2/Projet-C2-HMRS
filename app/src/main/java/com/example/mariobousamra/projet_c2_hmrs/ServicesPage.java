@@ -35,7 +35,7 @@ public class ServicesPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_page);
 
-        Title = (TextView)findViewById(R.id.tvTitle);
+        Title = (TextView)findViewById(R.id.textView8);
 
 
         listView = (ListView)findViewById(R.id.databaseListview5);
