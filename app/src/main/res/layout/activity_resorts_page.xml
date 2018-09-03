@@ -11,7 +11,7 @@
     tools:context=".ResortsPage">
 
     <ListView
-        android:id="@+id/databaseListview"
+        android:id="@+id/databaseListview2"
         android:layout_width="match_parent"
         android:layout_height="390dp"
         android:layout_alignParentBottom="true"

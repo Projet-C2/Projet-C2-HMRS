@@ -68,7 +68,7 @@ public class HotelsPage extends AppCompatActivity {
                            //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                            //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
                            String category = info_item_snapshot.child("product_category").getValue().toString();
-                           if(category.equals("hotel")){
+                           if(category.equals("Hotel")){
                                String productName = info_item_snapshot.child("product_name").getValue().toString();
                                ListElementsArrayList.add(productName);
                                adapter.notifyDataSetChanged();

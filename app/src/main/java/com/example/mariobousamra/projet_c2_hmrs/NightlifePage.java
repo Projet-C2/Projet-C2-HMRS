@@ -35,10 +35,10 @@ public class NightlifePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nightlife_page);
 
-        Title = (TextView)findViewById(R.id.tvTitle);
+        //Title = (TextView)findViewById(R.id.tvTitle);
 
 
-        listView = (ListView)findViewById(R.id.databaseListview);
+        listView = (ListView)findViewById(R.id.databaseListview4);
         final List < String > ListElementsArrayList = new ArrayList< String>(Arrays.asList(ListElements));
         final ArrayAdapter< String > adapter = new ArrayAdapter < String >
                 (NightlifePage.this, android.R.layout.simple_list_item_1, ListElementsArrayList);

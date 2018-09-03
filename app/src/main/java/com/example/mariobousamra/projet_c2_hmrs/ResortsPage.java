@@ -38,7 +38,7 @@ public class ResortsPage extends AppCompatActivity {
         Title = (TextView)findViewById(R.id.tvTitle);
 
 
-        listView = (ListView)findViewById(R.id.databaseListview);
+        listView = (ListView)findViewById(R.id.databaseListview2);
         final List < String > ListElementsArrayList = new ArrayList< String>(Arrays.asList(ListElements));
         final ArrayAdapter< String > adapter = new ArrayAdapter < String >
                 (ResortsPage.this, android.R.layout.simple_list_item_1, ListElementsArrayList);

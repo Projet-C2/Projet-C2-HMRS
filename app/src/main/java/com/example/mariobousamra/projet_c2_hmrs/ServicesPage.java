@@ -33,12 +33,12 @@ public class ServicesPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hotels_page);
+        setContentView(R.layout.activity_services_page);
 
         Title = (TextView)findViewById(R.id.tvTitle);
 
 
-        listView = (ListView)findViewById(R.id.databaseListview);
+        listView = (ListView)findViewById(R.id.databaseListview5);
         final List < String > ListElementsArrayList = new ArrayList< String>(Arrays.asList(ListElements));
         final ArrayAdapter< String > adapter = new ArrayAdapter < String >
                 (ServicesPage.this, android.R.layout.simple_list_item_1, ListElementsArrayList);
