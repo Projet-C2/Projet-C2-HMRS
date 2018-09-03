@@ -86,7 +86,7 @@
         app:layout_constraintVertical_bias="0.22" />
 
     <ListView
-        android:id="@+id/user_list"
+        android:id="@+id/databaseListview"
         android:layout_width="350dp"
         android:layout_height="346dp"
         android:layout_marginBottom="8dp"

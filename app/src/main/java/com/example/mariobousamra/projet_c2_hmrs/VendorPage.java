@@ -24,8 +24,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static com.example.mariobousamra.projet_c2_hmrs.R.id.user_list;
+import static com.example.mariobousamra.projet_c2_hmrs.R.id.databaseListview;
 
 public class VendorPage extends AppCompatActivity {
 
@@ -42,46 +44,85 @@ public class VendorPage extends AppCompatActivity {
     private ArrayList<String> mList = new ArrayList<>();
 
 
+
+
+    private ListView listView;
+    String[] ListElements = new String[] {};
+
+
+    private FirebaseDatabase firebaseDatabase;
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_page);
 
-        //list view data
-        //mDatabase1 = FirebaseDatabase.getInstance().getReference();
-        //mUserList =(ListView)findViewById(R.id.user_list);
-        //final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, mList);
-        //mUserList.setAdapter(arrayAdapter);
-       // mDatabase1.addChildEventListener(new ChildEventListener() {
-        //    @Override
-       //     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-        //        String value = dataSnapshot.getValue(String.class);
-        //        mList.add(value);
-        //        arrayAdapter.notifyDataSetChanged();
 
-        //    }
 
-        //    @Override
-         //   public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-        //    }
 
-        //    @Override
-         //   public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-        //    }
 
-        //    @Override
-        //    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+        listView = (ListView)findViewById(R.id.databaseListview);
+        final List< String > ListElementsArrayList = new ArrayList< String>(Arrays.asList(ListElements));
+        final ArrayAdapter< String > adapter = new ArrayAdapter < String >
+                (VendorPage.this, android.R.layout.simple_list_item_1, ListElementsArrayList);
+        listView.setAdapter(adapter);
 
-        //    }
 
-         //  @Override
-         //  public void onCancelled(@NonNull DatabaseError databaseError) {
 
-         //   }
-       // });
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
+        DatabaseReference databaseReference = firebaseDatabase.getReference();//.child("zSlSpnH1aXaHkNcT0XhNTBKoePJ2");//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //iterating users
+                for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
+//                    try {
+//                        // Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getRef().addValueEventListener().toString(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getValue().toString(), Toast.LENGTH_SHORT).show();
+//                    }catch (Exception ex){
+//
+//                    }
+                    //iterating user fields
+                    for(DataSnapshot info_item_snapshot:item_snapshot.getChildren()) {
+                        try {
+                            //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                            //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
+                            String category = info_item_snapshot.child("product_category").getValue().toString();
+
+
+                                String productName = info_item_snapshot.child("product_name").getValue().toString();
+                                ListElementsArrayList.add(productName);
+                                adapter.notifyDataSetChanged();
+                            
+                        } catch (Exception ex) {
+                            //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+                Toast.makeText(VendorPage.this, "Please select a product", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(VendorPage.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
 
 
         firebaseAuth = FirebaseAuth.getInstance();
