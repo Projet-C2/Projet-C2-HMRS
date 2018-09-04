@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                                         {
                                             @Override
                                             public void onClick(View view){
-                                                
+
 
                                                 //Here to start the activities
                                                 if(finalI==0)//Open activity one-->hotels page

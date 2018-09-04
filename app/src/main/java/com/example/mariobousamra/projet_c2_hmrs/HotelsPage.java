@@ -38,7 +38,7 @@ public class HotelsPage extends AppCompatActivity {
         setContentView(R.layout.activity_hotels_page);
 
         Title = (TextView)findViewById(R.id.HotelList);
-        Title.setText("NEARBY " + category);
+        Title.setText("NEARBY " + category.toUpperCase());
 
 
 
@@ -60,12 +60,6 @@ public class HotelsPage extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //iterating users
                for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
-//                    try {
-//                        // Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getRef().addValueEventListener().toString(), Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getValue().toString(), Toast.LENGTH_SHORT).show();
-//                    }catch (Exception ex){
-//
-//                    }
                    //iterating user fields
                    for(DataSnapshot info_item_snapshot:item_snapshot.getChildren()) {
                        try {
@@ -82,7 +76,9 @@ public class HotelsPage extends AppCompatActivity {
                        }
                    }
                }
-               Toast.makeText(HotelsPage.this, "Please select a product", Toast.LENGTH_LONG).show();
+               if(listView.getAdapter().getCount() != 0){
+                   Toast.makeText(HotelsPage.this, "Please select a product", Toast.LENGTH_SHORT).show();
+               }
             }
 
             @Override
