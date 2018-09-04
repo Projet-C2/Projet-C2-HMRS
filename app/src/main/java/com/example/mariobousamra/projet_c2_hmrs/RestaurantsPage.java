@@ -78,7 +78,9 @@ public class RestaurantsPage extends AppCompatActivity {
                         }
                     }
                 }
-                Toast.makeText(RestaurantsPage.this, "Please select a product", Toast.LENGTH_LONG).show();
+                //if(listView.){
+                    Toast.makeText(RestaurantsPage.this, "Please select a product", Toast.LENGTH_LONG).show();
+                //}
             }
 
             @Override

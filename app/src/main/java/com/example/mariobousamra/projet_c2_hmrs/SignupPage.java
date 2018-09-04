@@ -49,6 +49,7 @@ public class SignupPage extends AppCompatActivity {
         Location = (TextView)findViewById(R.id.tvLocation);
 
         Location Coor = Globals.Coordinates;
+
         if (Coor != null){
             Location.setText("Latitude:"+Coor.getLatitude()+" \n Longitude: "+Coor.getLongitude());
         }

@@ -68,7 +68,7 @@ public class FashionPage extends AppCompatActivity {
                             //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                             //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
                             String category = info_item_snapshot.child("product_category").getValue().toString();
-                            if(category.equals("fashion")){
+                            if(category.equals("Fashion")){
                                 String productName = info_item_snapshot.child("product_name").getValue().toString();
                                 ListElementsArrayList.add(productName);
                                 adapter.notifyDataSetChanged();

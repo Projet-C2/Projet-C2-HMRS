@@ -30,12 +30,16 @@ public class HotelsPage extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
 
+    String category = Globals.Category;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotels_page);
 
         Title = (TextView)findViewById(R.id.HotelList);
+        Title.setText("NEARBY " + category);
+
 
 
         listView = (ListView)findViewById(R.id.databaseListview);
@@ -67,8 +71,8 @@ public class HotelsPage extends AppCompatActivity {
                        try {
                            //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                            //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
-                           String category = info_item_snapshot.child("product_category").getValue().toString();
-                           if(category.equals("Hotel")){
+                           String prod_category = info_item_snapshot.child("product_category").getValue().toString();
+                           if(prod_category.equals(category)){
                                String productName = info_item_snapshot.child("product_name").getValue().toString();
                                ListElementsArrayList.add(productName);
                                adapter.notifyDataSetChanged();

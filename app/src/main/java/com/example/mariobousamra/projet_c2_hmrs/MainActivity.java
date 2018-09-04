@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.buttonlocation);
         textView = (TextView) findViewById(R.id.textViewlocation);
+
 
 
 
@@ -114,42 +114,53 @@ public class MainActivity extends AppCompatActivity {
                                         {
                                             @Override
                                             public void onClick(View view){
+                                                
+
                                                 //Here to start the activities
                                                 if(finalI==0)//Open activity one-->hotels page
                                                 {
-                                                        Intent intent = new Intent(MainActivity.this, HotelsPage.class);
-                                                        startActivity(intent);
+                                                    Globals.Category = "Hotel";
+//                                                        Intent intent = new Intent(MainActivity.this, HotelsPage.class);
+//                                                        startActivity(intent);
                                                 }
                                                 else
                                                 if(finalI==1)//Open activity two-->Resorts page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,ResortsPage.class);
-                                                    startActivity(intent);
+                                                    Globals.Category = "Resort";
+//                                                    Intent intent =new Intent(MainActivity.this,ResortsPage.class);
+//                                                    startActivity(intent);
                                                 }
                                                 else
                                                 if(finalI==2)//Open activity three-->Fashion page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,FashionPage.class);
-                                                    startActivity(intent);
+                                                    Globals.Category = "Fashion";
+//                                                    Intent intent =new Intent(MainActivity.this,FashionPage.class);
+//                                                    startActivity(intent);
                                                 }
                                                 else
                                                 if(finalI==3)//Open activity four-->Night Life page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,NightlifePage.class);
-                                                    startActivity(intent);
+                                                    Globals.Category = "Night life";
+//                                                    Intent intent =new Intent(MainActivity.this,NightlifePage.class);
+//                                                    startActivity(intent);
                                                 }
                                                 else
                                                 if(finalI==4)//Open activity five-->Restaurants page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,RestaurantsPage.class);
-                                                    startActivity(intent);
+                                                    Globals.Category = "Restaurant";
+//                                                    Intent intent =new Intent(MainActivity.this,RestaurantsPage.class);
+//                                                    startActivity(intent);
                                                 }
                                                 else
                                                 if(finalI==5)//Open activity six-->Services page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,ServicesPage.class);
-                                                    startActivity(intent);
+                                                    Globals.Category = "service";
+//                                                    Intent intent =new Intent(MainActivity.this,ServicesPage.class);
+//                                                    startActivity(intent);
                                                 }
+
+                                                Intent intent = new Intent(MainActivity.this, HotelsPage.class);
+                                                startActivity(intent);
                                             }
                                         }
             );
