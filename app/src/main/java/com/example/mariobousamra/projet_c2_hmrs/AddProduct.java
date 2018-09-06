@@ -233,12 +233,16 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                    @Override
                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                        Toast.makeText(AddProduct.this, "Upload successful!", Toast.LENGTH_SHORT).show();
+                       Intent intent = new Intent(AddProduct.this, VendorPage.class);
+                       startActivity(intent);
                    }
                });
 
            }else{
                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
            }
+
+
 
         }
 

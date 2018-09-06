@@ -43,28 +43,15 @@ public class VendorPage extends AppCompatActivity {
     private ListView mUserList;
     private ArrayList<String> mList = new ArrayList<>();
 
-
-
-
     private ListView listView;
     String[] ListElements = new String[] {};
 
-
     private FirebaseDatabase firebaseDatabase;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor_page);
-
-
-
-
-
 
 
 
@@ -75,7 +62,6 @@ public class VendorPage extends AppCompatActivity {
         listView.setAdapter(adapter);
 
 
-
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
@@ -84,32 +70,24 @@ public class VendorPage extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+//                if(listView.getAdapter().getCount() != 0){
+//                    listView.setAdapter(null);
+//                }
+//                listView.setAdapter(adapter);
                 //iterating users
                 for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
-                     //Toast.makeText(VendorPage.this, "item id " + item_snapshot.toString(), Toast.LENGTH_LONG).show();
-
-//                    try {
-//                        // Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getRef().addValueEventListener().toString(), Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getValue().toString(), Toast.LENGTH_SHORT).show();
-//                    }catch (Exception ex){
-//
-//                    }
-                    //iterating user fields
-                    //for(DataSnapshot info_item_snapshot:item_snapshot.getChildren()) {
                         try {
-                            //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                            //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
-
                             String productName = item_snapshot.child("product_name").getValue().toString();
                             ListElementsArrayList.add(productName);
                             adapter.notifyDataSetChanged();
-                            
                         } catch (Exception ex) {
                             //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();
                         }
+                    //if(listView.getAdapter().getCount() != 0){
+                    //  Toast.makeText(VendorPage.this, "Please select a product", Toast.LENGTH_LONG).show();
                     //}
                 }
-                Toast.makeText(VendorPage.this, "Please select a product", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -117,10 +95,6 @@ public class VendorPage extends AppCompatActivity {
                 Toast.makeText(VendorPage.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
 
 
 
@@ -184,28 +158,28 @@ public class VendorPage extends AppCompatActivity {
 
 
 
-    //ctl + o // ALT + 0 (with NUMLOCK off)
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.logoutMenu:{
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user==null){
-                    //finish this activity
-                    //finish();
-                    Toast.makeText(VendorPage.this,"User is not logged in", Toast.LENGTH_SHORT).show();
-                    //and direct him to the activity
-                    //startActivity(new Intent(LoginPage.this, MainActivity.class));
-                }else{
-                    try {
-                        firebaseAuth.signOut();
-                        Toast.makeText(VendorPage.this, "User Sign out!", Toast.LENGTH_SHORT).show();
-                    }catch (Exception e) {
-                        e.getMessage();
-                    }
-                }
-            }
-        }
-        return true;
-    }
+//    //ctl + o // ALT + 0 (with NUMLOCK off)
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case R.id.logoutMenu:{
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if(user==null){
+//                    //finish this activity
+//                    //finish();
+//                    Toast.makeText(VendorPage.this,"User is not logged in", Toast.LENGTH_SHORT).show();
+//                    //and direct him to the activity
+//                    //startActivity(new Intent(LoginPage.this, MainActivity.class));
+//                }else{
+//                    try {
+//                        firebaseAuth.signOut();
+//                        Toast.makeText(VendorPage.this, "User Sign out!", Toast.LENGTH_SHORT).show();
+//                    }catch (Exception e) {
+//                        e.getMessage();
+//                    }
+//                }
+//            }
+//        }
+//        return true;
+//    }
 }
