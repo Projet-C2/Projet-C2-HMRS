@@ -79,13 +79,15 @@ public class VendorPage extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
-        DatabaseReference databaseReference = firebaseDatabase.getReference();//.child("zSlSpnH1aXaHkNcT0XhNTBKoePJ2");//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //iterating users
                 for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
+                     //Toast.makeText(VendorPage.this, "item id " + item_snapshot.toString(), Toast.LENGTH_LONG).show();
+
 //                    try {
 //                        // Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getRef().addValueEventListener().toString(), Toast.LENGTH_SHORT).show();
 //                        Toast.makeText(HotelsPage.this, "item id " + item_snapshot.child("product_category").getValue().toString(), Toast.LENGTH_SHORT).show();
@@ -93,21 +95,19 @@ public class VendorPage extends AppCompatActivity {
 //
 //                    }
                     //iterating user fields
-                    for(DataSnapshot info_item_snapshot:item_snapshot.getChildren()) {
+                    //for(DataSnapshot info_item_snapshot:item_snapshot.getChildren()) {
                         try {
                             //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                             //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
-                            String category = info_item_snapshot.child("product_category").getValue().toString();
 
-
-                                String productName = info_item_snapshot.child("product_name").getValue().toString();
-                                ListElementsArrayList.add(productName);
-                                adapter.notifyDataSetChanged();
+                            String productName = item_snapshot.child("product_name").getValue().toString();
+                            ListElementsArrayList.add(productName);
+                            adapter.notifyDataSetChanged();
                             
                         } catch (Exception ex) {
                             //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();
                         }
-                    }
+                    //}
                 }
                 Toast.makeText(VendorPage.this, "Please select a product", Toast.LENGTH_LONG).show();
             }
