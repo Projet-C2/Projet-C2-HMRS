@@ -28,7 +28,6 @@
         <activity android:name=".NightlifePage" />
         <activity android:name=".ResortsPage" />
         <activity android:name=".RestaurantsPage" />
-        <activity android:name=".ServicesPage" />
         <activity android:name=".LoginPage" />
         <activity android:name=".SignupPage" />
         <activity android:name=".ForgotPassword" />
