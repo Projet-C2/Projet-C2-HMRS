@@ -124,7 +124,8 @@ public class MainActivity extends AppCompatActivity {
                                                 else
                                                 if(finalI==1)//Open activity two-->Resorts page
                                                 {
-                                                    Globals.Category = "Resort";
+                                                    Intent intent =new Intent(MainActivity.this,ResortsPage.class);
+                                                    startActivity(intent);
                                                 }
                                                 else
                                                 if(finalI==2)//Open activity three-->Fashion page
