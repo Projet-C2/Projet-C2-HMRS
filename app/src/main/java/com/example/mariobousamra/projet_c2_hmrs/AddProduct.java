@@ -56,6 +56,10 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
     Button button;
     TextView textView;
+    TextView x;
+    TextView y;
+    String coorx;
+    String coory;
 
     ImageView imageView;
 
@@ -91,6 +95,8 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
        //location button
         button = (Button) findViewById(R.id.buttonlocation);
         textView = (TextView) findViewById(R.id.textViewlocation);
+        x = (TextView) findViewById(R.id.xnumber);
+        y = (TextView) findViewById(R.id.ynumber);
 
         ActivityCompat.requestPermissions(AddProduct.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
 
@@ -104,9 +110,11 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                     double lat = l.getLatitude();
                     double lon = l.getLongitude();
                     LatLng myCoordinates = new LatLng(lat,lon);
-                    Toast.makeText(getApplicationContext(),"Latitude:"+lat+" \n Longitude: "+lon, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(),"Latitude:"+lat+" \n Longitude: "+lon, Toast.LENGTH_LONG).show();
                     String cityName = getCityName(myCoordinates);
                     textView.setText(cityName);
+                    x.setText(Double.toString(lat));
+                    y.setText(Double.toString(lon));
 
                 }
 
@@ -202,8 +210,10 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             product_description = txt_description.getText().toString();
             product_category = spinner.getSelectedItem().toString();
             product_status = spinner2.getSelectedItem().toString();
+            coorx = x.getText().toString();
+            coory = y.getText().toString();
 
-            if(!(product_name.isEmpty() || product_price.isNaN() || product_description.isEmpty() || product_category.isEmpty() || product_status.isEmpty() || (realPath == "") ) ){
+            if(!(product_name.isEmpty() || product_price.isNaN()|| coorx.isEmpty() || coory.isEmpty() || product_description.isEmpty() || product_category.isEmpty() || product_status.isEmpty() || (realPath == "") ) ){
 
                //get uid from auth.
                FirebaseDatabase firebasedatabse = FirebaseDatabase.getInstance();
@@ -249,6 +259,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
             txt_name.setText("");
             txt_price.setText("");
             txt_description.setText("");
+
 
             if (realPath !="") {
                 imageView.setImageResource(0);

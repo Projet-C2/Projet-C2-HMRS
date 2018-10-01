@@ -11,7 +11,7 @@ Float product_price;
 String product_status;
 String product_description;
 
-public Product (String product_name, String product_category,Float product_price,String product_status, String product_description)
+public Product(String product_name, String product_category, Float product_price, String productStatus, String productDescription)
 {
 
     this.product_name = product_name;
