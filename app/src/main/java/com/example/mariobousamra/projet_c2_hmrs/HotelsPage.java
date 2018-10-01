@@ -88,6 +88,9 @@ public class HotelsPage extends AppCompatActivity {
         });
 
 
+
+        
+
     }
 
 }

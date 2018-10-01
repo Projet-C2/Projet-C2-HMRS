@@ -47,7 +47,8 @@
 
         <activity
             android:name=".GMapsActivity"
-            android:label="@string/title_activity_gmaps"></activity>
+            android:label="@string/title_activity_gmaps" />
+        <activity android:name=".ProductDetails"></activity>
     </application>
 
 </manifest>
