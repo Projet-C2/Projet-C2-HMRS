@@ -1,5 +1,7 @@
 package com.example.mariobousamra.projet_c2_hmrs;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+
+import java.io.FileNotFoundException;
 
 public class ProductDetails extends AppCompatActivity {
 
@@ -69,20 +73,32 @@ public class ProductDetails extends AppCompatActivity {
                             if(prod_category.equals(product_name)) {
                                 //get the Uid ex: QNqWIXGKySORpTcWpv0HLXV03Ax2
                                 Uidwithimage = item_snapshot.getRef().getKey().toString();
-                                //if(Uidwithimage != null ){
-                                  //Toast.makeText(ProductDetails.this, "Uid : " + Uidwithimage, Toast.LENGTH_LONG).show();
-                                //}
+/*                              if(Uidwithimage != null ){
+                                  Toast.makeText(ProductDetails.this, "Uid : " + Uidwithimage + product_name, Toast.LENGTH_LONG).show();
+                                }*/
                                 tvName.setText(info_item_snapshot.child("product_name").getValue().toString());
                                 tvPrice.setText(info_item_snapshot.child("product_price").getValue().toString());
                                 tvdescription.setText(info_item_snapshot.child("product_description").getValue().toString());
                                 tvStatus.setText(info_item_snapshot.child("product_status").getValue().toString());
+
                                 break outerloop;
                             }
                         } catch (Exception ex) {
-                            //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();
+
                         }
                     }
                 }
+
+
+                //load image from firebase to imageview
+                firebaseStorage = FirebaseStorage.getInstance();
+                StorageReference storageReference = firebaseStorage.getReference();
+                storageReference.child(Uidwithimage).child(product_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).fit().centerCrop().into(ivProdImage);
+                    }
+                });
 
             }
 
@@ -91,16 +107,6 @@ public class ProductDetails extends AppCompatActivity {
                 Toast.makeText(ProductDetails.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-        firebaseStorage = FirebaseStorage.getInstance();
-        StorageReference storageReference = firebaseStorage.getReference();
-/*        storageReference.child(Uidwithimage).child(product_name).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).fit().centerCrop().into(ivProdImage);
-            }
-        });*/
 
     }
 }
