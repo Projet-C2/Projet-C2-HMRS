@@ -64,7 +64,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     ImageView imageView;
 
     Button button_image;
-    Button button_new;
+
     Button button_save;
     Button button_cancel;
 
@@ -123,7 +123,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         //find by id.
         button_image = findViewById(R.id.button_image);
-        button_new = findViewById(R.id.button_new);
         button_save = findViewById(R.id.button_Save);
         button_cancel = findViewById(R.id.button_cancel);
 
@@ -135,7 +134,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         // add click listener to buttons
         button_image.setOnClickListener(this);
-        button_new.setOnClickListener(this);
         button_save.setOnClickListener(this);
         button_cancel.setOnClickListener(this);
 
@@ -254,21 +252,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         }
 
-        if (view.equals(button_new)) {
-
-            txt_name.setText("");
-            txt_price.setText("");
-            txt_description.setText("");
-
-
-            if (realPath !="") {
-                imageView.setImageResource(0);
-            }
-
-            spinner.setSelection(0);
-            spinner2.setSelection(0);
-
-        }
+        
 
         if (view.equals(button_cancel)) {
             Intent intent = new Intent(AddProduct.this, VendorPage.class);
