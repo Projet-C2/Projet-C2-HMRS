@@ -242,8 +242,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
            }
 
-
-
         }
 
         if (view.equals(button_new)) {

@@ -28,6 +28,6 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         //set data to views
         mTitleTv.setText(title);
         mDetailsTv.setText(description);
-        Picasso.get().load(image).into(mImageTv);
+        Picasso.get().load(image).fit().centerCrop().into(mImageTv);
     }
 }

@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setSingleEvent(GridLayout mainGrid) {
         //Get current location
-        final Location Coor = Globals.Coordinates;
 
         //Loop All Child item of Main Grid
         for(int i=0;i<mainGrid.getChildCount();i++)
@@ -148,8 +147,8 @@ public class MainActivity extends AppCompatActivity {
                                                     Globals.Category = "service";
                                                 }
 
-                                                Intent intent = new Intent(MainActivity.this, HotelsPage.class);
-                                                startActivity(intent);
+                                                //Intent intent = new Intent(MainActivity.this, HotelsPage.class);
+                                                //startActivity(intent);
                                             }
                                         }
             );

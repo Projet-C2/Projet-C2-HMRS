@@ -37,10 +37,7 @@ public class ResortsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resorts_page);
 
-       //Actionbar
-        ActionBar actionBar = getSupportActionBar();
-        //set title
-        actionBar.setTitle("Posts List");
+
 
         //RecyclerView
         mRecyclerView = findViewById(R.id.resortList);
@@ -51,7 +48,7 @@ public class ResortsPage extends AppCompatActivity {
 
         //send Query to firebaseDatabase
         FirebaseDatabase = FirebaseDatabase.getInstance();
-        mRef = FirebaseDatabase.getReference();
+        mRef = FirebaseDatabase.getReference().child("mVJDqFJxG7aAP023KW5sdoqk0iv1").child("123");
 
     }
     /* Load Data into recycler View on start */
@@ -59,16 +56,17 @@ public class ResortsPage extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-                FirebaseRecyclerAdapter<Model,ViewHolder> firebaseRecyclerAdapter =
-                        new FirebaseRecyclerAdapter<Model, ViewHolder>( Model.class,
-                                R.layout.row,
-                                ViewHolder.class,
-                                mRef) {
-                            @Override
-                            protected void populateViewHolder(ViewHolder viewHolder, Model model, int position) {
-                            viewHolder.setDetails(getApplicationContext(),model.getProduct_name(),model.getProduct_description(),model.getProduct_image());
-                            }
-                        };
+        FirebaseRecyclerAdapter<Model,ViewHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Model, ViewHolder>(
+                        Model.class,
+                        R.layout.row,
+                        ViewHolder.class,
+                        mRef) {
+                    @Override
+                        protected void populateViewHolder(ViewHolder viewHolder, Model model, int position) {
+                        viewHolder.setDetails(getApplicationContext(),model.getProduct_name(),model.getProduct_description(),model.getProduct_image());
+                    }
+                };
 
 
         //set adaptor to recyclerview
