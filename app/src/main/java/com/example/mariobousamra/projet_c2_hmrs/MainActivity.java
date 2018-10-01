@@ -123,8 +123,7 @@ public class MainActivity extends AppCompatActivity {
                                                 else
                                                 if(finalI==1)//Open activity two-->Resorts page
                                                 {
-                                                    Intent intent =new Intent(MainActivity.this,ResortsPage.class);
-                                                    startActivity(intent);
+                                                    Globals.Category = "Resort";
                                                 }
                                                 else
                                                 if(finalI==2)//Open activity three-->Fashion page
@@ -147,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
                                                     Globals.Category = "service";
                                                 }
 
-                                                //Intent intent = new Intent(MainActivity.this, HotelsPage.class);
-                                                //startActivity(intent);
+                                                Intent intent = new Intent(MainActivity.this, HotelsPage.class);
+                                                startActivity(intent);
                                             }
                                         }
             );
