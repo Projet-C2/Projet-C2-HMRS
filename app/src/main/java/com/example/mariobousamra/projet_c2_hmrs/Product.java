@@ -10,8 +10,10 @@ String product_category;
 Float product_price;
 String product_status;
 String product_description;
+String coorx;
+String coory;
 
-public Product(String product_name, String product_category, Float product_price, String productStatus, String productDescription)
+public Product(String product_name, String product_category, Float product_price, String product_status, String product_description, String coorx, String coory)
 {
 
     this.product_name = product_name;
@@ -19,6 +21,8 @@ public Product(String product_name, String product_category, Float product_price
     this.product_price = product_price;
     this.product_status = product_status;
     this.product_description = product_description;
+    this.coorx = coorx;
+    this.coory = coory;
 
 }
 
@@ -60,5 +64,19 @@ public Product(String product_name, String product_category, Float product_price
 
     public void setProduct_description(String product_description) {
         this.product_description = product_description;
+    }
+    public String getcoorx() {
+        return coorx;
+    }
+
+    public void setcoorx(String coorx) {
+        this.coorx = coorx;
+    }
+    public String getcoory() {
+        return coory;
+    }
+
+    public void setcoory(String coory) {
+        this.coory = coory;
     }
 }

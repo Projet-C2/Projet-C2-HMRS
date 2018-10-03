@@ -220,7 +220,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
                DatabaseReference myref = firebasedatabse.getReference(firebaseAuth.getUid()).child(product_name) ;
 
                //new object of the class Product to the object to firebase database.
-               Product product = new Product (product_name,product_category,product_price,product_status,product_description);
+               Product product = new Product (product_name,product_category,product_price,product_status,product_description,coorx,coory);
 
                //send data to firebase database.
                myref.setValue(product);
@@ -252,7 +252,7 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
         }
 
-        
+
 
         if (view.equals(button_cancel)) {
             Intent intent = new Intent(AddProduct.this, VendorPage.class);
