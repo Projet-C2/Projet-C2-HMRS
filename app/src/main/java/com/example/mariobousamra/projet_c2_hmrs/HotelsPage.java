@@ -1,6 +1,7 @@
 package com.example.mariobousamra.projet_c2_hmrs;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Api;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +38,8 @@ public class HotelsPage extends AppCompatActivity {
 
     String category = Globals.Category;
 
+    public Location ClientCoor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +56,7 @@ public class HotelsPage extends AppCompatActivity {
                 (HotelsPage.this, android.R.layout.simple_list_item_1, ListElementsArrayList);
         listView.setAdapter(adapter);
 
-
+        ClientCoor = Globals.Coordinates;
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -68,11 +73,24 @@ public class HotelsPage extends AppCompatActivity {
                        try {
                            //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                            //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
-                           String prod_category = info_item_snapshot.child("product_category").getValue().toString();
-                           if(prod_category.equals(category)){
-                               String productName = info_item_snapshot.child("product_name").getValue().toString();
-                               ListElementsArrayList.add(productName);
-                               adapter.notifyDataSetChanged();
+
+
+                           //If coordinates are at a 5km radius.
+                           double Long = Double.parseDouble(info_item_snapshot.child("coorx").getValue().toString()) ;
+                           double Lat  = Double.parseDouble(info_item_snapshot.child("coory").getValue().toString()) ;
+                           LatLng ShopLocation = new LatLng(Lat, Long);
+                           //get client current location
+                           float[] results = new float[1];
+                           Location.distanceBetween(ShopLocation.latitude, ShopLocation.longitude, ClientCoor.getLatitude(), ClientCoor.getLongitude(), results);
+                           if(results[0] <= 5){
+
+                               String prod_category = info_item_snapshot.child("product_category").getValue().toString();
+                               if(prod_category.equals(category)){
+                                   String productName = info_item_snapshot.child("product_name").getValue().toString();
+                                   ListElementsArrayList.add(productName);
+                                   adapter.notifyDataSetChanged();
+                               }
+
                            }
                        } catch (Exception ex) {
                            //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();

@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                                                 else
                                                 if(finalI==3)//Open activity four-->Night Life page
                                                 {
-                                                    Globals.Category = "Night life";
+                                                    Globals.Category = "Night Life";
                                                 }
                                                 else
                                                 if(finalI==4)//Open activity five-->Restaurants page
