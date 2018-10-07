@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HotelsPage extends AppCompatActivity {
+public class HotelsPage extends AppCompatActivity{
 
     private TextView Title;
     private ListView listView;
@@ -40,87 +40,93 @@ public class HotelsPage extends AppCompatActivity {
 
     public Location ClientCoor;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotels_page);
 
-        Title = (TextView)findViewById(R.id.HotelList);
+        Title = (TextView) findViewById(R.id.HotelList);
         Title.setText("NEARBY " + category.toUpperCase());
 
 
+            //Toast.makeText(getApplicationContext(), "Client Latitude:" + Globals.Coordinates.getLatitude() + " \n Client Longitude: " + Globals.Coordinates.getLongitude(), Toast.LENGTH_LONG).show();
 
-        listView = (ListView)findViewById(R.id.databaseListview);
-        final List < String > ListElementsArrayList = new ArrayList< String>(Arrays.asList(ListElements));
-        final ArrayAdapter< String > adapter = new ArrayAdapter < String >
-                (HotelsPage.this, android.R.layout.simple_list_item_1, ListElementsArrayList);
-        listView.setAdapter(adapter);
+            listView = (ListView) findViewById(R.id.databaseListview);
+            final List<String> ListElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));
+            final ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                    (HotelsPage.this, android.R.layout.simple_list_item_1, ListElementsArrayList);
+            listView.setAdapter(adapter);
 
-        ClientCoor = Globals.Coordinates;
+            ClientCoor = Globals.Coordinates;
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
-        DatabaseReference databaseReference = firebaseDatabase.getReference();//.child("zSlSpnH1aXaHkNcT0XhNTBKoePJ2");//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
+            firebaseAuth = FirebaseAuth.getInstance();
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
+            DatabaseReference databaseReference = firebaseDatabase.getReference();//.child("zSlSpnH1aXaHkNcT0XhNTBKoePJ2");//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //iterating users
-               for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
-                   //iterating user fields
-                   for(DataSnapshot info_item_snapshot:item_snapshot.getChildren()) {
-                       try {
-                           //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                           //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
-
-
-                           //If coordinates are at a 5km radius.
-                           double Long = Double.parseDouble(info_item_snapshot.child("coorx").getValue().toString()) ;
-                           double Lat  = Double.parseDouble(info_item_snapshot.child("coory").getValue().toString()) ;
-                           LatLng ShopLocation = new LatLng(Lat, Long);
-                           //get client current location
-                           float[] results = new float[1];
-                           Location.distanceBetween(ShopLocation.latitude, ShopLocation.longitude, ClientCoor.getLatitude(), ClientCoor.getLongitude(), results);
-                           if(results[0] <= 5){
-
-                               String prod_category = info_item_snapshot.child("product_category").getValue().toString();
-                               if(prod_category.equals(category)){
-                                   String productName = info_item_snapshot.child("product_name").getValue().toString();
-                                   ListElementsArrayList.add(productName);
-                                   adapter.notifyDataSetChanged();
-                               }
-
-                           }
-                       } catch (Exception ex) {
-                           //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();
-                       }
-                   }
-               }
-               if(listView.getAdapter().getCount() != 0){
-                   Toast.makeText(HotelsPage.this, "Please select a product", Toast.LENGTH_SHORT).show();
-               }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(HotelsPage.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //iterating users
+                    for (DataSnapshot item_snapshot : dataSnapshot.getChildren()) {
+                        //iterating user fields
+                        for (DataSnapshot info_item_snapshot : item_snapshot.getChildren()) {
+                            try {
+                                //UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                                //Toast.makeText(HotelsPage.this, "" + info_item_snapshot.child("product_name").getValue().toString(), Toast.LENGTH_SHORT).show();
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(HotelsPage.this, ProductDetails.class);
+                                //If coordinates are at a 5km radius.
+                                double Long = Double.parseDouble(info_item_snapshot.child("coorx").getValue().toString());
+                                double Lat = Double.parseDouble(info_item_snapshot.child("coory").getValue().toString());
+                                LatLng ShopLocation = new LatLng(Lat, Long);
+                                //get client current location
+                                float[] results = new float[1];
+                                //Location.distanceBetween(ShopLocation.latitude, ShopLocation.longitude, ClientCoor.getLatitude(), ClientCoor.getLongitude(), results);
+                                Location.distanceBetween(Globals.Coordinates.getLatitude(), Globals.Coordinates.getLongitude(), Long, Lat, results);
 
-                String message =(String) parent.getItemAtPosition(position);
+                                if (results[0] <= 5) {
 
-                intent.putExtra("product_name", message);
-                startActivity(intent);
-            }
-        });
+                                    String prod_category = info_item_snapshot.child("product_category").getValue().toString();
+                                    if (prod_category.equals(category)) {
+                                        String productName = info_item_snapshot.child("product_name").getValue().toString();
+                                        ListElementsArrayList.add(productName);
+                                        adapter.notifyDataSetChanged();
+                                    }
 
-    }
+                                }
+                            } catch (Exception ex) {
+                                //Toast.makeText(HotelsPage.this, "" + ex, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+                    if (listView.getAdapter().getCount() != 0) {
+                        Toast.makeText(HotelsPage.this, "Please select a product", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(HotelsPage.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(HotelsPage.this, ProductDetails.class);
+
+                    String message = (String) parent.getItemAtPosition(position);
+
+                    intent.putExtra("product_name", message);
+                    startActivity(intent);
+                }
+            });
+
+        }
+
 
 }

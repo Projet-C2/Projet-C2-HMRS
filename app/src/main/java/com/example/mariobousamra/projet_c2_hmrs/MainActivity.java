@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     TextView textView;
+    double lat=0;
+    double lon=0;
+
 
 
     @Override
@@ -57,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 Location l =g.getLocation();
                 Globals.Coordinates = l;
                 if(l != null){
-                    double lat = l.getLatitude();
-                    double lon = l.getLongitude();
+                    lat = l.getLatitude();
+                    lon = l.getLongitude();
                     LatLng myCoordinates = new LatLng(lat,lon);
                     Toast.makeText(getApplicationContext(),"Latitude:"+lat+" \n Longitude: "+lon, Toast.LENGTH_LONG).show();
                     String cityName = getCityName(myCoordinates);
