@@ -51,7 +51,7 @@ public class HotelsPage extends AppCompatActivity{
         Title.setText("NEARBY " + category.toUpperCase());
 
 
-            //Toast.makeText(getApplicationContext(), "Client Latitude:" + Globals.Coordinates.getLatitude() + " \n Client Longitude: " + Globals.Coordinates.getLongitude(), Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Client Latitude:" + Globals.Coordinates.getLatitude() + " \n Client Longitude: " + Globals.Coordinates.getLongitude(), Toast.LENGTH_LONG).show();
 
             listView = (ListView) findViewById(R.id.databaseListview);
             final List<String> ListElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));

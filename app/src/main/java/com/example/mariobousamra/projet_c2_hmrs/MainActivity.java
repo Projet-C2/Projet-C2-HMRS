@@ -148,9 +148,12 @@ public class MainActivity extends AppCompatActivity {
                                                 {
                                                     Globals.Category = "service";
                                                 }
-
-                                                Intent intent = new Intent(MainActivity.this, HotelsPage.class);
-                                                startActivity(intent);
+                                                if(lat ==0 || lon ==0){
+                                                    Toast.makeText(getApplicationContext(), "Please click on Get Current Location", Toast.LENGTH_LONG).show();
+                                                }else {
+                                                    Intent intent = new Intent(MainActivity.this, HotelsPage.class);
+                                                    startActivity(intent);
+                                                }
                                             }
                                         }
             );
