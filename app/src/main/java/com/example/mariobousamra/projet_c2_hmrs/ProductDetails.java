@@ -44,6 +44,9 @@ public class ProductDetails extends AppCompatActivity {
 
     public String Uidwithimage;
 
+    public double Lat;
+    public double Long;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +93,9 @@ public class ProductDetails extends AppCompatActivity {
                                 tvdescription.setText(info_item_snapshot.child("product_description").getValue().toString());
                                 tvStatus.setText(info_item_snapshot.child("product_status").getValue().toString());
 
+                                Long = Double.parseDouble(info_item_snapshot.child("coorx").getValue().toString());
+                                Lat = Double.parseDouble(info_item_snapshot.child("coory").getValue().toString());
+
                                 break outerloop;
                             }
                         } catch (Exception ex) {
@@ -122,7 +128,7 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //open google maps with shop coordinates
-                String uri = String.format(Locale.ENGLISH.ENGLISH, "geo:%f,%f", Globals.Coordinates.getLatitude(), Globals.Coordinates.getLongitude());
+                String uri = String.format(Locale.ENGLISH.ENGLISH, "geo:%f,%f", Lat, Long);
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 //startActivity(intent);
                 getApplicationContext().startActivity(intent);
