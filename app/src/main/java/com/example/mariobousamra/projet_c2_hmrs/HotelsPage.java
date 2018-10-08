@@ -85,7 +85,7 @@ public class HotelsPage extends AppCompatActivity{
                                 //get client current location
                                 float[] results = new float[1];
                                 //Location.distanceBetween(ShopLocation.latitude, ShopLocation.longitude, ClientCoor.getLatitude(), ClientCoor.getLongitude(), results);
-                                Location.distanceBetween(Globals.Coordinates.getLatitude(), Globals.Coordinates.getLongitude(), Long, Lat, results);
+                                Location.distanceBetween(Globals.Coordinates.getLatitude(), Globals.Coordinates.getLongitude(), Lat, Long, results);
 
                                 if (results[0] <= 5) {
 
