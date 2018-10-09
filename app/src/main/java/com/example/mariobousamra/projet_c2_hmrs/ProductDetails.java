@@ -128,12 +128,18 @@ public class ProductDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //open google maps with shop coordinates
-                String uri = String.format(Locale.ENGLISH.ENGLISH, "geo:%f,%f", Lat, Long);
+                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?saddr=%f,%f(%s)&daddr=%f,%f (%s)", Globals.Coordinates.getLatitude(), Globals.Coordinates.getLongitude(), "Current", Lat, Long, "destination");
+
+                //String uri = String.format(Locale.ENGLISH.ENGLISH, "geo:%f,%f", Lat, Long);
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 //startActivity(intent);
                 getApplicationContext().startActivity(intent);
+
+/*                String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?saddr=%f,%f(%s)&daddr=%f,%f (%s)", Lat, Long);//, "Home Sweet Home", destinationLatitude, destinationLongitude, "Where the party is at");
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                intent.setPackage("com.google.android.apps.maps");
+                startActivity(intent);*/
             }
         });
-
     }
 }
