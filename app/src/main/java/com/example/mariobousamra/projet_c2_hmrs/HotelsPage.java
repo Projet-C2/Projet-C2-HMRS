@@ -79,13 +79,12 @@ public class HotelsPage extends AppCompatActivity{
 
 
                                 //If coordinates are at a 5km radius.
-                                double Long = Double.parseDouble(info_item_snapshot.child("coorx").getValue().toString());
-                                double Lat = Double.parseDouble(info_item_snapshot.child("coory").getValue().toString());
+                                double Long = Double.parseDouble(info_item_snapshot.child("coory").getValue().toString());
+                                double Lat = Double.parseDouble(info_item_snapshot.child("coorx").getValue().toString());
                                 LatLng ShopLocation = new LatLng(Lat, Long);
                                 //get client current location
                                 float[] results = new float[1];
-                                //Location.distanceBetween(ShopLocation.latitude, ShopLocation.longitude, ClientCoor.getLatitude(), ClientCoor.getLongitude(), results);
-                                Location.distanceBetween(Globals.Coordinates.getLatitude(), Globals.Coordinates.getLongitude(), Lat, Long, results);
+                                Location.distanceBetween(Globals.Coordinates.getLatitude(), Globals.Coordinates.getLongitude(),Lat,Long, results);
 
                                 if (results[0] <= 5) {
 
