@@ -104,6 +104,9 @@ public class HotelsPage extends AppCompatActivity{
                     if (listView.getAdapter().getCount() != 0) {
                         Toast.makeText(HotelsPage.this, "Please select a product", Toast.LENGTH_SHORT).show();
                     }
+                    if (listView.getAdapter().getCount() == 0) {
+                        Toast.makeText(HotelsPage.this, "No nearby product", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
