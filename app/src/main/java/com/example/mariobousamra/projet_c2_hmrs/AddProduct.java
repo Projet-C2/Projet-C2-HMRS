@@ -85,7 +85,6 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
 
     private FirebaseAuth firebaseAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
