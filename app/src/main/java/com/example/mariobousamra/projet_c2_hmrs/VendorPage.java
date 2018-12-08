@@ -39,7 +39,6 @@ public class VendorPage extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private TextView mNameView;
 
-    private DatabaseReference mDatabase1;
     private ListView mUserList;
     private ArrayList<String> mList = new ArrayList<>();
 
@@ -64,18 +63,13 @@ public class VendorPage extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        //DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child(firebaseAuth.getUid());//"cCyQM76KQ3gaWusydXY1HjkrKFB3");
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child(firebaseAuth.getUid());
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-//                if(listView.getAdapter().getCount() != 0){
-//                    listView.setAdapter(null);
-//                }
-//                listView.setAdapter(adapter);
-                //iterating users
+
                 for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
                         try {
                             String productName = item_snapshot.child("product_name").getValue().toString();
