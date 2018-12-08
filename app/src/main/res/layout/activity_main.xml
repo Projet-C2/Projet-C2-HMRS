@@ -54,8 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/textView"
-            android:layout_marginEnd="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="17dp"
             android:onClick="Signup"
             android:text="SignUp"
             android:textColor="#FF0000"
@@ -65,9 +65,9 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textGrid"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="15dp"
             android:text="Location:"
             android:textStyle="bold" />
 
@@ -75,8 +75,8 @@
             android:id="@+id/buttonlocation"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/textView4"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textGrid"
             android:text="@string/get_current_location"
             android:textSize="10sp" />
 

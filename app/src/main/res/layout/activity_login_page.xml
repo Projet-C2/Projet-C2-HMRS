@@ -116,10 +116,10 @@
             android:textColor="#FF0000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.733"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPass"
-            app:layout_constraintVertical_bias="0.05" />
+            app:layout_constraintVertical_bias="0.054" />
 
         <TextView
             android:id="@+id/tvSignUp"
@@ -135,10 +135,10 @@
             android:textColor="#FF0000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.738"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvForgotPass"
-            app:layout_constraintVertical_bias="0.628" />
+            app:layout_constraintVertical_bias="0.616" />
 
 
     </android.support.constraint.ConstraintLayout>
