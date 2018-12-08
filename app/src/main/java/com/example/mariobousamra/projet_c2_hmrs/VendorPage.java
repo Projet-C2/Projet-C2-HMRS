@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -148,9 +149,25 @@ public class VendorPage extends AppCompatActivity {
 
             }
         });
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id)
+            {
+                //String selectedFromList = (listView.getItemAtPosition(position).toString());
+                String prod = (String) listView.getAdapter().getItem(position);
+
+                Intent intent =new Intent(VendorPage.this,AddProduct.class);
+
+                //passing product name to AddProduct.
+                intent.putExtra("prod", prod);
+                startActivity(intent);
+
+            }});
+
+
+
     }
-
-
 
 //    //ctl + o // ALT + 0 (with NUMLOCK off)
 //    @Override

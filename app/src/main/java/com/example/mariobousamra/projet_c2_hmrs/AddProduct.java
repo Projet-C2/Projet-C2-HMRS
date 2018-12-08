@@ -88,8 +88,13 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-       super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_add_product);
+
+        //get value from VendorPage if we are coming from there.
+        Intent intent = getIntent();
+        String prod = intent.getStringExtra("prod");
+
 
        //location button
         button = (Button) findViewById(R.id.buttonlocation);
