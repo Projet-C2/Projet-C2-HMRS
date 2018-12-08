@@ -8,6 +8,7 @@
     <item>Resort</item>
     <item>Restaurant</item>
     <item>service</item>
+     <item>Product</item>
     </string-array>
 
     <string-array name="status_product">

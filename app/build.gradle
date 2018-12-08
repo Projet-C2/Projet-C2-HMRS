@@ -40,7 +40,7 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-database:0.4.0'
 
     //This is added for firebase use
-    implementation 'c om.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.0'
     //Added from https://firebase.google.com/docs/android/setup?authuser=0, for Authentication
     implementation 'com.google.firebase:firebase-auth:16.0.3'
     implementation 'com.google.firebase:firebase-database:16.0.1'
