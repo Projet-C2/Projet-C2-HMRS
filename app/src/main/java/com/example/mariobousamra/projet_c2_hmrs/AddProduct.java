@@ -95,6 +95,12 @@ public class AddProduct extends AppCompatActivity implements View.OnClickListene
         Intent intent = getIntent();
         String prod = intent.getStringExtra("prod");
 
+        //if we are coming from vendor page:
+        if (prod != null){
+
+        //item_snapshot = DataSnapshot.getChildren()
+
+        }
 
        //location button
         button = (Button) findViewById(R.id.buttonlocation);

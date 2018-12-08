@@ -161,6 +161,7 @@ public class VendorPage extends AppCompatActivity {
 
                 //passing product name to AddProduct.
                 intent.putExtra("prod", prod);
+                //intent.putExtra("uid", uid);
                 startActivity(intent);
 
             }});
